@@ -54,4 +54,15 @@ export class UserController {
       next(e);
     }
   }
+
+  static async logout(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      await UserService.logout(req.user!); //tapi karena bisa optional dan kita pasti tidak akan kosong maka diberi tanda seru
+      res.status(200).json({
+        data: "OK",
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
